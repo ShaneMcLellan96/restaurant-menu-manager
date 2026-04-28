@@ -1,0 +1,8 @@
+{
+  "/menus/[id]/page": "app/menus/[id]/page.js",
+  "/menus/[id]/items/new/page": "app/menus/[id]/items/new/page.js",
+  "/menus/page": "app/menus/page.js",
+  "/assistant/page": "app/assistant/page.js",
+  "/items/[id]/edit/page": "app/items/[id]/edit/page.js",
+  "/page": "app/page.js"
+}
