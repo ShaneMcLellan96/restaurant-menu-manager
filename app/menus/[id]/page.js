@@ -5,6 +5,7 @@ import Menu from '@/lib/models/Menu';
 import Category from '@/lib/models/Category';
 import MenuItem from '@/lib/models/MenuItem';
 import CategorySection from '@/components/CategorySection';
+import DeleteMenuButton from '@/components/DeleteMenuButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -88,12 +89,15 @@ export default async function MenuDetailPage({ params }) {
           </div>
         </div>
 
-        <Link
-          href={`/menus/${id}/items/new`}
-          className="shrink-0 px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition-colors"
-        >
-          + Add Item
-        </Link>
+        <div className="flex items-center gap-2 shrink-0">
+          <Link
+            href={`/menus/${id}/items/new`}
+            className="px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition-colors"
+          >
+            + Add Item
+          </Link>
+          <DeleteMenuButton menuId={id} menuName={menu.name} />
+        </div>
       </div>
 
       {/* Categories + Items */}
