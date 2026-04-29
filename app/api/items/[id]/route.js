@@ -58,7 +58,15 @@ export async function PUT(request, { params }) {
   }
 
   // Re-index updated item
-  ingestMenuItem(item).catch((e) => console.error('Pinecone ingest error:', e));
+  try {
+    await ingestMenuItem(item);
+  } catch (e) {
+    console.error('Pinecone ingest error:', e);
+    return NextResponse.json(
+      { error: 'Item saved but failed to re-index for assistant', item },
+      { status: 500 }
+    );
+  }
 
   return NextResponse.json(item);
 }
@@ -69,7 +77,11 @@ export async function DELETE(request, { params }) {
   const item = await MenuItem.findByIdAndDelete(id);
   if (!item) return NextResponse.json({ error: 'Not found' }, { status: 404 });
 
-  deleteMenuItemVector(id).catch((e) => console.error('Pinecone delete error:', e));
+  try {
+    await deleteMenuItemVector(id);
+  } catch (e) {
+    console.error('Pinecone delete error:', e);
+  }
 
   return NextResponse.json({ success: true });
 }

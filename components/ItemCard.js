@@ -3,8 +3,27 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function ItemCard({ item, onAvailabilityToggle }) {
+export default function ItemCard({ item, onAvailabilityToggle, onDelete }) {
   const [loading, setLoading] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+
+  async function handleDelete() {
+    const confirmed = window.confirm(`Delete "${item.name}"? This cannot be undone.`);
+    if (!confirmed) return;
+
+    setDeleting(true);
+    try {
+      const res = await fetch(`/api/items/${item._id}`, { method: 'DELETE' });
+      if (!res.ok) {
+        const d = await res.json().catch(() => ({}));
+        throw new Error(d.error ?? 'Failed to delete item');
+      }
+      onDelete?.(item._id);
+    } catch (err) {
+      alert(err.message);
+      setDeleting(false);
+    }
+  }
 
   async function toggleAvailability() {
     setLoading(true);
@@ -78,6 +97,14 @@ export default function ItemCard({ item, onAvailabilityToggle }) {
         >
           Edit
         </Link>
+        <button
+          type="button"
+          onClick={handleDelete}
+          disabled={deleting}
+          className="text-sm text-red-600 hover:text-red-700 font-medium disabled:opacity-50"
+        >
+          {deleting ? 'Deleting…' : 'Delete'}
+        </button>
       </div>
     </div>
   );

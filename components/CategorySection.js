@@ -11,6 +11,10 @@ export default function CategorySection({ category, initialItems }) {
     setItems((prev) => prev.map((i) => (i._id === updated._id ? updated : i)));
   }
 
+  function handleDelete(deletedId) {
+    setItems((prev) => prev.filter((i) => i._id !== deletedId));
+  }
+
   return (
     <section className="mb-8">
       <button
@@ -38,6 +42,7 @@ export default function CategorySection({ category, initialItems }) {
                 key={item._id}
                 item={item}
                 onAvailabilityToggle={handleAvailabilityToggle}
+                onDelete={handleDelete}
               />
             ))
           )}

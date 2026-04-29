@@ -20,7 +20,11 @@ export async function PATCH(request, { params }) {
   if (!item) return NextResponse.json({ error: 'Not found' }, { status: 404 });
 
   // Keep Pinecone metadata in sync
-  ingestMenuItem(item).catch((e) => console.error('Pinecone ingest error:', e));
+  try {
+    await ingestMenuItem(item);
+  } catch (e) {
+    console.error('Pinecone ingest error:', e);
+  }
 
   return NextResponse.json(item);
 }
