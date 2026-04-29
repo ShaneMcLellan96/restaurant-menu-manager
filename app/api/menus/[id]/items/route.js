@@ -76,8 +76,17 @@ export async function POST(request, { params }) {
     return NextResponse.json({ error: 'Invalid categoryId for this menu' }, { status: 400 });
   }
 
-  // Index into Pinecone asynchronously (don't block the response)
-  ingestMenuItem(item).catch((e) => console.error('Pinecone ingest error:', e));
+  // Index into Pinecone before responding so failures surface and the item
+  // is queryable by the assistant immediately.
+  try {
+    await ingestMenuItem(item);
+  } catch (e) {
+    console.error('Pinecone ingest error:', e);
+    return NextResponse.json(
+      { error: 'Item saved but failed to index for assistant', item },
+      { status: 500 }
+    );
+  }
 
   return NextResponse.json(item, { status: 201 });
 }
