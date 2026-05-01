@@ -30,21 +30,21 @@ export default async function DashboardPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-8">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
           <p className="text-sm text-gray-500 mt-0.5">Overview of your restaurant menus</p>
         </div>
         <Link
           href="/menus/new"
-          className="px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition-colors"
+          className="self-start sm:self-auto px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition-colors"
         >
           + New Menu
         </Link>
       </div>
 
       {/* KPI Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-10">
         <KPICard title="Total Menus"       value={totalMenus}      color="brand" />
         <KPICard title="Menu Items"        value={totalItems}      color="blue"  />
         <KPICard title="Available Items"   value={availableItems}  color="brand" subtitle={`${unavailableItems} unavailable`} />

@@ -43,7 +43,7 @@ export default function ItemCard({ item, onAvailabilityToggle, onDelete }) {
   }
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-4 flex items-start justify-between gap-4">
+    <div className="bg-white rounded-lg border border-gray-200 p-4 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2 flex-wrap">
           <span className="font-medium text-gray-900">{item.name}</span>
@@ -63,7 +63,7 @@ export default function ItemCard({ item, onAvailabilityToggle, onDelete }) {
           <p className="mt-1 text-sm text-gray-500 line-clamp-2">{item.description}</p>
         )}
 
-        <div className="mt-2 flex items-center gap-4 text-sm">
+        <div className="mt-2 flex items-center flex-wrap gap-x-4 gap-y-1 text-sm">
           <span className="font-semibold text-gray-900">${item.price.toFixed(2)}</span>
           {item.calories != null && (
             <span className="text-gray-400">{item.calories} cal</span>
@@ -76,7 +76,7 @@ export default function ItemCard({ item, onAvailabilityToggle, onDelete }) {
         </div>
       </div>
 
-      <div className="flex items-center gap-2 shrink-0">
+      <div className="flex items-center gap-3 sm:gap-2 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-gray-100">
         <button
           onClick={toggleAvailability}
           disabled={loading}

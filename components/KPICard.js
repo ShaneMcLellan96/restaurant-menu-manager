@@ -7,9 +7,9 @@ export default function KPICard({ title, value, subtitle, color = 'brand' }) {
   };
 
   return (
-    <div className={`rounded-xl border p-6 ${colorMap[color] ?? colorMap.brand}`}>
-      <p className="text-sm font-medium opacity-70">{title}</p>
-      <p className="mt-1 text-4xl font-bold tracking-tight">{value}</p>
+    <div className={`rounded-xl border p-4 sm:p-6 ${colorMap[color] ?? colorMap.brand}`}>
+      <p className="text-xs sm:text-sm font-medium opacity-70">{title}</p>
+      <p className="mt-1 text-2xl sm:text-4xl font-bold tracking-tight">{value}</p>
       {subtitle && <p className="mt-1 text-xs opacity-60">{subtitle}</p>}
     </div>
   );

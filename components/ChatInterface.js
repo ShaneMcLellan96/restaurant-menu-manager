@@ -11,7 +11,7 @@ function Message({ role, text }) {
         </div>
       )}
       <div
-        className={`max-w-[75%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${
+        className={`max-w-[85%] sm:max-w-[75%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${
           role === 'user'
             ? 'bg-brand-600 text-white rounded-br-sm'
             : 'bg-white border border-gray-200 text-gray-800 rounded-bl-sm'
@@ -109,9 +109,9 @@ export default function ChatInterface({ restaurantId }) {
   }
 
   return (
-    <div className="flex flex-col h-[calc(100vh-10rem)] bg-gray-50 rounded-xl border border-gray-200 overflow-hidden">
+    <div className="flex flex-col h-[calc(100vh-12rem)] sm:h-[calc(100vh-10rem)] bg-gray-50 rounded-xl border border-gray-200 overflow-hidden">
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-6 space-y-4">
+      <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
         {messages.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full text-center text-gray-400">
             <span className="text-5xl mb-4">🍽️</span>
